@@ -1,4 +1,8 @@
 <?php
+include "./custom.php";
+
+
+
 
 // indexed array
 // $munnas = [
@@ -49,48 +53,68 @@
 // ***function
 
 
-function sum($num1, $num2){
-    return $num1 + $num2 . "<br>";
-}
+// function sum($num1, $num2){
+//     return $num1 + $num2 . "<br>";
+// }
 
 
-echo sum(20, 20);
-echo sum(40, 20);
-echo sum(20, 70);
-
-
-
-function reuseable($name, $des){
-    echo "Name: $name";
-    echo "<br>";
-    echo "Description: $des";
-}
-
-
-reuseable("anik", "I love dhaka <br>");
-for ($i=1; $i <= 10; $i++) { 
-    echo "$i <br>";
-}
-reuseable("apu", "I love Bangaldesh <br>");
-if (true) {
-    echo "i am also happy <br>";
-}
-reuseable("apurbo", "I love india <br>");
+// echo sum(20, 20);
+// echo sum(40, 20);
+// echo sum(20, 70);
 
 
 
+// function reuseable($name, $des){
+//     echo "Name: $name";
+//     echo "<br>";
+//     echo "Description: $des";
+// }
 
 
 
+// for ($i=1; $i <= 10; $i++) { 
+//     echo "$i <br>";
+// }
+// reuseable("apu", "I love Bangaldesh <br>");
+// if (true) {
+//     echo "i am also happy <br>";
+// }
+// reuseable("apurbo", "I love india <br>");
 
+
+
+// ***bulit in functions
 
 
 
 
+// $var = "I love dhaka";
+// echo ucwords($var);
+// echo ucfirst($var);
+// echo lcfirst($var);
+// echo strtoupper($var);
+// echo strtolower($var);
+// echo strlen($var);
+// echo str_replace("dhaka", "Dhaka", $var);
+// echo strrev($var);
+
+
+
+// $arr = [122, 47, 88, 54, 62, 55];
+
+// echo max($arr);
+// echo min($arr);
 
 
 
 
+
+
+
+// ----------------------------
+
+
+echo reuseable("anik", "I love dhaka <br>");
 
 
 
