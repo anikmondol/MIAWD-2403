@@ -114,7 +114,8 @@ include "./custom.php";
 // ----------------------------
 
 
-echo reuseable("anik", "I love dhaka <br>");
+// echo reuseable("anik", "I love dhaka <br>");
+
 
 
 
