@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+
 
 
 // echo $_SERVER;
@@ -27,17 +30,23 @@ if (isset($_POST["submit"])) {
             if (is_numeric($year)) {
 
                 if ($year % 4 === 0 && ($year % 400 === 0 || $year % 100 != 0)) {
-                    echo "This is leap year";
+                    echo $_SESSION["successful"] = "This is leap year";
+                    header("location: index.php");
                 } else {
-                    echo "This is not leap year";
+                    echo $_SESSION["successful"] = "This is not leap year";
+                    header("location: index.php");
                 }
             } else {
-                echo "This field can't be accept string";
+                echo $_SESSION["year_error"] = "This field can't be accept string";
+                header("location: index.php");
+                // header("index")
             }
         } else {
-            echo "invalid number/year";
+            echo $_SESSION["year_error"] = "invalid number/year";
+            header("location: index.php");
         }
     } else {
-        echo "this field can't be null or required";
+        $_SESSION["year_error"] = "this field can't be null or required";
+        header("location: index.php");
     }
 }

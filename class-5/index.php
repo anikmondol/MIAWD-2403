@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +23,21 @@
         <button type="submit">Submit</button> -->
 
 
+        <!-- input -->
         <input type="text" placeholder="enter your value" name="year">
-        <button name="submit" type="submit">submit</button>
 
+        <!-- session error -->
+        <?php if(isset($_SESSION["year_error"])){?>
+        <p style="color:red;font-size:12px;"><?php echo $_SESSION["year_error"];?></p></p>
+        <?php unset($_SESSION["year_error"]); }?>
+
+         <!-- session successful -->  
+        <?php if(isset($_SESSION["successful"])){?>
+        <p style="color:green;font-size:12px;"><?php echo $_SESSION["successful"];?></p>
+        <?php unset($_SESSION["successful"]);}?>
+
+        <!-- from button -->
+        <button name="submit" type="submit">submit</button>
 
 
 
