@@ -1,52 +1,52 @@
 <?php
+
 session_start();
 
 
-
-
-// echo $_SERVER;
+// echo "anik aco tumei";
 // print_r($_SERVER);
 // print_r($_POST);
-// print_r($_POST["email"]);
-// print_r($_POST["password"]);
+// echo $_POST["username"];
+// echo "<br>";
+// echo $_POST["password"];
 
 
-// $email = $_POST["email"];
-// $password = $_POST["password"];
-// echo "user-email: $email " ."<br>"; 
-// echo "user-password: $password";
+// $user_name = $_POST["username"];
+// $user_name = $_POST["password"];
 
-
-
-
-
+// echo "Email : $user_name";
+// echo "<br>";
+// echo "Password : $user_name";
 
 
 if (isset($_POST["submit"])) {
     $year = $_POST["year"];
 
-    if ($year) {
+    if ($year ) {
         if (strlen($year) == 4) {
-            if (is_numeric($year)) {
 
-                if ($year % 4 === 0 && ($year % 400 === 0 || $year % 100 != 0)) {
-                    echo $_SESSION["successful"] = "This is leap year";
+            if (is_numeric($year)) {
+                if ($year % 4 == 0 && ($year % 400 == 0 || $year % 100 != 0)) {
+                    $_SESSION["successful"] = "This is leap year";
                     header("location: index.php");
-                } else {
-                    echo $_SESSION["successful"] = "This is not leap year";
-                    header("location: index.php");
-                }
+                 }else{
+                     $_SESSION["successful"] = "This not leap year";
+                     header("location: index.php");
+                 }
             } else {
-                echo $_SESSION["year_error"] = "This field can't be accept string";
+                $_SESSION["erro"] =  "This field can't be accept strin";
                 header("location: index.php");
-                // header("index")
             }
         } else {
-            echo $_SESSION["year_error"] = "invalid number/year";
+            $_SESSION["erro"] =  "invalid number/year";
             header("location: index.php");
         }
     } else {
-        $_SESSION["year_error"] = "this field can't be null or required";
+        
+        $_SESSION["erro"] = "This field can't be null required ";
         header("location: index.php");
     }
+    
+
+    
 }

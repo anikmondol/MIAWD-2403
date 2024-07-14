@@ -22,8 +22,8 @@
     </style>
 </head>
 
-<body class="bg-slate-300 h-[100vh] flex items-center justify-center">
-    <div class="bg-red-300 p-12 rounded-md">
+<body class="bg-slate-100 h-[100vh] flex items-center justify-center">
+    <div class="bg-red-100 p-12 rounded-md shadow-lg">
         <div class="flex flex-col md:flex-row justify-center items-center gap-10">
             <!-- text-div -->
             <div class="w-[90%] md:w-[50%]">
@@ -57,7 +57,7 @@
 
         <!--  php include function code here -->
         <div class="text-center mt-8">
-            <p>
+            <p class="text-green-600 font-medium">
 
                 <?php
 
