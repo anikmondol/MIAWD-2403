@@ -12,6 +12,8 @@ if (isset($_POST["submit_btn"])) {
 
 
 
+    $flag = false;
+
     // name validation 
 
     // ***problem-1
@@ -35,12 +37,18 @@ if (isset($_POST["submit_btn"])) {
 
     if (!$name) {
         $_SESSION["name_error"] = "Name Field is Required!!!";
+        $flag = true;
+
         header("location: register.php");
     } elseif (!ctype_alpha($name)) {
-        $_SESSION["name_error"] = "We can't use any numarical character!!!";
+        $_SESSION["name_error"] = "We can't use any numerical character!!!";
+        $flag = true;
+
         header("location: register.php");
     } elseif (strlen($name) >= 30) {
-        $_SESSION["name_error"] = "We can't use length 30 greter than!!!";
+        $_SESSION["name_error"] = "We can't use length 30 grater than!!!";
+        $flag = true;
+
         header("location: register.php");
     }
 
@@ -57,9 +65,13 @@ if (isset($_POST["submit_btn"])) {
 
     if (!$email) {
         $_SESSION["email_error"] = "email Field is Required!!!";
+        $flag = true;
+
         header("location: register.php");
     } elseif (!preg_match($email_regex, $email)) {
         $_SESSION["email_error"] = "Invalid email provide!!!";
+        $flag = true;
+
         header("location: register.php");
     }
 
@@ -80,21 +92,33 @@ if (isset($_POST["submit_btn"])) {
 
     if (!$password) {
         $_SESSION['password_error'] = "Password Field is Required!!";
+        $flag = true;
+
         header("location: register.php");
     } else if (!preg_match($password_regex_length, $password)) {
         $_SESSION['password_error'] = "Password must be minimum 8 characters length!!";
+        $flag = true;
+
         header("location: register.php");
     } else if (!preg_match($password_regex_uppercase, $password)) {
         $_SESSION['password_error'] = "Password must be at least one uppercase letter!!";
+        $flag = true;
+
         header("location: register.php");
     } else if (!preg_match($password_regex_lowercase, $password)) {
         $_SESSION['password_error'] = "Password must be at least one lowercase letter!!";
+        $flag = true;
+
         header("location: register.php");
     } else if (!preg_match($password_regex_number, $password)) {
         $_SESSION['password_error'] = "Password must be at least one number!!";
+        $flag = true;
+
         header("location: register.php");
     } else if (!preg_match($password_regex_special, $password)) {
         $_SESSION['password_error'] = "Password must be have one special character!!";
+        $flag = true;
+
         header("location: register.php");
     }
 
@@ -108,20 +132,25 @@ if (isset($_POST["submit_btn"])) {
 
     if (!$c_password) {
         $_SESSION['c_password_error'] = "Password Field is Required!!";
+        $flag = true;
+
         header("location: register.php");
-    }elseif($c_password != $password){
-        $_SESSION['c_password_error'] = "Confirm password crendential donsn't match !!";
+    } elseif ($c_password != $password) {
+        $_SESSION['c_password_error'] = "Confirm password credential doesn't match !!";
+        $flag = true;
+
         header("location: register.php");
     }
 
 
-
-
-
-
-
-
+    if ($flag) {
+        echo "khrap";
+    } else {
+        $db = mysqli_connect("localhost", "root", "", "Portfolio-Web");
+        $encrypt_pass = sha1($password);
+        $createQuery = "INSERT INTO `users`( name, email, password) VALUES ('$name', '$email', '$encrypt_pass')";
+        mysqli_query($db, $createQuery);
+        $_SESSION['register_success'] = "Registration Complete !!";
+        header("location: register.php");
+    }
 }
-
-
-

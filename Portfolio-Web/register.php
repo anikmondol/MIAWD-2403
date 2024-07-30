@@ -51,10 +51,26 @@
             </div>
             <p class="auth-description">Pleas enter your credentials to create an account.<br>Already have an account? <a href="sign-in.html">Sign In</a></p>
 
+            <!-- register_success start -->
+
+
+            <?php if (isset($_SESSION["register_success"])) {
+            ?>
+                <div class="alert alert-custom d-flex justify-content-center align-items-center" role="alert">
+                    <div class="custom-alert-icon icon-register_success "><i class="material-icons-outlined text-success">done</i></div>
+                    <div class="alert-content ">
+                        <span class="alert-title text-success"> <?php echo $_SESSION["register_success"]; ?> </span>
+                    </div>
+                </div>
+
+                <!-- register_success end -->
+
+            <?php unset($_SESSION["register_success"]);
+            } ?>
+
             <form action="register_post.php" method="POST">
 
                 <div class="auth-credentials m-b-xxl">
-
 
                     <label for="signUpUsername" class="form-label">Name</label>
                     <input name="name" type="text" class="form-control m-b-md" aria-describedby="signUpUsername" placeholder="Enter Name">
@@ -89,6 +105,8 @@
                     <?php }
                     unset($_SESSION["password_error"]); ?>
                     <!-- password error end -->
+
+                    <br>
 
                     <label for="signUpPassword" class="form-label">Confirm Password</label>
                     <input name="c_password" type="password" class="form-control" aria-describedby="signUpPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
