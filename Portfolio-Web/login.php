@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+
+session_start();
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +45,7 @@
 </head>
 
 <body>
-    <div class="app app-auth-sign-up align-content-stretch d-flex flex-wrap justify-content-end">
+    <div class="app app-auth-sign-in align-content-stretch d-flex flex-wrap justify-content-end">
         <div class="app-auth-background">
 
         </div>
@@ -49,38 +53,38 @@
             <div class="logo">
                 <a href="index.html">Neptune</a>
             </div>
-            <p class="auth-description">Pleas enter your credentials to create an account.<br>Already have an account? <a href="login.php">Login In</a></p>
-            
-            <form action="register_post.php" method="POST">
+            <p class="auth-description">Please sign-in to your account and continue to the dashboard.<br>Don't have an account? <a href="register.php">Sign Up</a></p>
 
+            <!-- register_success start -->
+            <?php if (isset($_SESSION["register_success"])) {
+            ?>
+                <div class="alert alert-custom d-flex justify-content-center align-items-center alert-light" role="alert">
+                    <div class="custom-alert-icon icon-register_success "><i class="material-icons-outlined text-success">done</i></div>
+                    <div class="alert-content ">
+                        <span class="alert-title text-success"> <?php echo $_SESSION["register_success"]; ?> </span>
+                    </div>
+                </div>
+            <?php unset($_SESSION["register_success"]);
+            } ?>
+            <!-- register_success end -->
+
+            <form action="login_post.php" method="post">
                 <div class="auth-credentials m-b-xxl">
 
-                    <label for="signUpUsername" class="form-label">Name</label>
-                    <input name="name" type="text" class="form-control m-b-md" aria-describedby="signUpUsername" placeholder="Enter Name" value="<?= (isset($_SESSION["old_name"])) ? $_SESSION["old_name"] : ""; unset($_SESSION["old_name"]); ?>">
-                    <!-- name error start -->
-                    <?php if (isset($_SESSION["name_error"])) {
-                    ?>
-                        <div id="emailHelp" class="form-text m-b-md text-danger"> <?php echo $_SESSION["name_error"]; ?> *</div>
-                    <?php }
-                    unset($_SESSION["name_error"]); ?>
-                    <!-- name error end -->
-
-
-
-                    <label for="signUpEmail" class="form-label">Email address</label>
-                    <input name="email" type="text" class="form-control m-b-md" aria-describedby="signUpEmail" placeholder="example@neptune.com" value="<?= (isset($_SESSION["old_email"])) ? $_SESSION["old_email"] : ""; unset($_SESSION["old_email"]); ?>">
+                    <label for="signInEmail" class="form-label">Email address</label>
+                    <input name="email" type="text" class="form-control m-b-md <?= (isset($_SESSION["email_error"])) ? "is-invalid" : ""; ?>" id="signInEmail" aria-describedby="signInEmail" placeholder="example@neptune.com" value="<?= (isset($_SESSION["register_email"])) ? $_SESSION["register_email"] : ""; unset($_SESSION["register_email"]); ?>">
                     <!-- email error start -->
                     <?php if (isset($_SESSION["email_error"])) {
                     ?>
-                        <div id="emailHelp" class="form-text m-b-md text-danger"> <?php echo $_SESSION["email_error"]; ?> *</div>
+                        <div id="emailHelp" class="form-text m-b-md text-danger"><?php echo $_SESSION["email_error"]; ?> *</div>
                     <?php }
                     unset($_SESSION["email_error"]); ?>
                     <!-- email error end -->
 
 
-                    <label for="signUpPassword" class="form-label">Password</label>
-                    <input id="myInput" name="password" type="password" class="form-control" aria-describedby="signUpPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" value="<?= (isset($_SESSION["old_password"])) ? $_SESSION["old_password"] : ""; unset($_SESSION["old_password"]); ?>">
-                    <input class="my-3 lead" type="checkbox" onclick="myFunction()"> Show Password
+
+                    <label for="signInPassword" class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control <?= (isset($_SESSION["password_error"])) ? "is-invalid" : ''; ?>" id="signInPassword" aria-describedby="signInPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" value="<?= (isset($_SESSION["register_password"])) ? $_SESSION["register_password"] : ""; unset($_SESSION["register_password"]); ?>">
                     <!-- password error start -->
                     <?php if (isset($_SESSION["password_error"])) {
                     ?>
@@ -89,23 +93,11 @@
                     unset($_SESSION["password_error"]); ?>
                     <!-- password error end -->
 
-                    <br>
-
-                    <label for="signUpPassword" class="form-label">Confirm Password</label>
-                    <input name="c_password" type="password" class="form-control" aria-describedby="signUpPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-                    <!-- Confirm_password error start -->
-                    <?php if (isset($_SESSION["c_password_error"])) {
-                    ?>
-                        <div id="emailHelp" class="form-text m-b-md text-danger"> <?php echo $_SESSION["c_password_error"]; ?> *</div>
-                    <?php }
-                    unset($_SESSION["c_password_error"]); ?>
-                    <!-- Confirm_password error end -->
-
 
                 </div>
 
                 <div class="auth-submit">
-                    <button name="submit_btn" class="btn btn-primary">Sign Up</button>
+                    <button type="submit" name="login_Btn" class="btn btn-primary">Sign In</button>
                 </div>
             </form>
 
@@ -113,25 +105,13 @@
         </div>
     </div>
 
-    <!-- Javascripts -->
+    <!-- Javascript -->
     <script src="./dashboard_assets/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
     <script src="./dashboard_assets/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="./dashboard_assets/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
     <script src="./dashboard_assets/assets/plugins/pace/pace.min.js"></script>
     <script src="./dashboard_assets/assets/js/main.min.js"></script>
     <script src="./dashboard_assets/assets/js/custom.js"></script>
-    <!-- custom js -->
-    <script>
-        function myFunction() {
-            var x = document.getElementById("myInput");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-    </script>
-
 </body>
 
 </html>
