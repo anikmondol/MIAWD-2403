@@ -68,11 +68,27 @@ session_start();
             } ?>
             <!-- register_success end -->
 
+
+            <!-- login failed  msg start -->
+            <?php if (isset($_SESSION["login_failed"])) {
+            ?>
+                <div class="alert alert-custom d-flex justify-content-center align-items-center alert-light" role="alert">
+                    <div class="custom-alert-icon icon-danger "><i class="material-icons-outlined text-error">error</i></div>
+                    <div class="alert-content ">
+                        <span class="alert-title text-error"> <?php echo $_SESSION["login_failed"]; ?> </span>
+                    </div>
+                </div>
+            <?php unset($_SESSION["login_failed"]);
+            } ?>
+            <!-- login failed  msg end -->
+
+
             <form action="login_post.php" method="post">
                 <div class="auth-credentials m-b-xxl">
 
                     <label for="signInEmail" class="form-label">Email address</label>
-                    <input name="email" type="text" class="form-control m-b-md <?= (isset($_SESSION["email_error"])) ? "is-invalid" : ""; ?>" id="signInEmail" aria-describedby="signInEmail" placeholder="example@neptune.com" value="<?= (isset($_SESSION["register_email"])) ? $_SESSION["register_email"] : ""; unset($_SESSION["register_email"]); ?>">
+                    <input name="email" type="text" class="form-control m-b-md <?= (isset($_SESSION["email_error"])) ? "is-invalid" : ""; ?>" id="signInEmail" aria-describedby="signInEmail" placeholder="example@neptune.com" value="<?= (isset($_SESSION["register_email"])) ? $_SESSION["register_email"] : "";
+                                                                                                                                                                                                                                        unset($_SESSION["register_email"]); ?>">
                     <!-- email error start -->
                     <?php if (isset($_SESSION["email_error"])) {
                     ?>
@@ -84,7 +100,8 @@ session_start();
 
 
                     <label for="signInPassword" class="form-label">Password</label>
-                    <input name="password" type="password" class="form-control <?= (isset($_SESSION["password_error"])) ? "is-invalid" : ''; ?>" id="signInPassword" aria-describedby="signInPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" value="<?= (isset($_SESSION["register_password"])) ? $_SESSION["register_password"] : ""; unset($_SESSION["register_password"]); ?>">
+                    <input name="password" type="password" class="form-control <?= (isset($_SESSION["password_error"])) ? "is-invalid" : ''; ?>" id="signInPassword" aria-describedby="signInPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" value="<?= (isset($_SESSION["register_password"])) ? $_SESSION["register_password"] : "";
+                                                                                                                                                                                                                                                                                        unset($_SESSION["register_password"]); ?>">
                     <!-- password error start -->
                     <?php if (isset($_SESSION["password_error"])) {
                     ?>

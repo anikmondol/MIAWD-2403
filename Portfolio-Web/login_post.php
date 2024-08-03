@@ -1,5 +1,6 @@
 <?php
 
+require "./config/database.php";
 session_start();
 
 
@@ -7,7 +8,7 @@ if (isset($_POST["login_Btn"])) {
 
     $flag = false;
 
-    
+
     // email validation
     $email = $_POST["email"];
 
@@ -29,7 +30,7 @@ if (isset($_POST["login_Btn"])) {
     }
 
 
-    
+
     // password validation
     $password = $_POST["password"];
 
@@ -77,17 +78,34 @@ if (isset($_POST["login_Btn"])) {
 
 
 
-    if ($flag) {
-        echo "valo na";
-    } else {
-        echo "valo";
+    if (!$flag) {
+        $encrypt = sha1($password);
+        $count_query = "SELECT COUNT(*) AS 'count_result' FROM `users` WHERE email='$email' AND password='$encrypt'";
+        $connect = mysqli_query($db, $count_query);
+        
+
+
+        if (mysqli_fetch_assoc($connect)['count_result'] == 1) {
+           
+            $get_data_query = "SELECT * FROM `users` WHERE email='$email'";
+            $connect = mysqli_query($db, $get_data_query);
+
+            $user = mysqli_fetch_assoc($connect);
+
+            $_SESSION['auth_id'] = $user['id'];
+            $_SESSION['auth_name'] = $user['name'];
+            $_SESSION['auth_email'] = $user['email'];
+            
+
+            header("location: ./dashboard/home.php");
+
+
+
+        }else{
+            $_SESSION['login_failed'] = "credential  does't  match";
+            header("location: login.php");
+        }
+
+        
     }
-    
-
-
-
-  
 }
-
-
-?>
