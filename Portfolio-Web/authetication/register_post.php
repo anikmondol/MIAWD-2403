@@ -1,8 +1,10 @@
 <?php
 
-session_start();
 
-require"./config/database.php";
+
+require"../config/database.php";
+
+session_start();
 
 // print_r($_POST)
 
