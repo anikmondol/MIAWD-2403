@@ -2,9 +2,13 @@
 
 session_start();
 
+
+require"../config/database.php";
+
 if (isset($_SESSION['auth_id'])) {
-    header('location: ../dashboard/home/home.php');
+    header("location: ../dashboard/home/home.php");
 }
+
 
 
 ?>

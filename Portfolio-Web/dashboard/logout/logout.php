@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 session_start();
 
 session_unset();
 
-header('location: ../../authetication/login.php');
+header("location: ../../authetication/login.php");
 
 
 ?>

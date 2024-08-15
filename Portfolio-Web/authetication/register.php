@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php
+
+session_start();
+
+require"../config/database.php";
+
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,6 +84,14 @@
                     <?php }
                     unset($_SESSION["email_error"]); ?>
                     <!-- email error end -->
+
+                     <!-- duplicate error start -->
+                     <?php if (isset($_SESSION["duplicate"])) {
+                    ?>
+                        <div id="emailHelp" class="form-text m-b-md text-danger"> <?php echo $_SESSION["duplicate"]; ?> *</div>
+                    <?php }
+                    unset($_SESSION["duplicate"]); ?>
+                    <!-- duplicate error end -->
 
 
                     <label for="signUpPassword" class="form-label">Password</label>

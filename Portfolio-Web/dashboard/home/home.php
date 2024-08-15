@@ -1,12 +1,15 @@
 <?php
-include "../master/header.php";
 
-$users_query = "SELECT * FROM users";
+include "../master/header.php";
+include "../../config/database.php";
+
+$users_query = "select * FROM users";
 
 $users = mysqli_query($db, $users_query);
 
 
 ?>
+
 
 <!-- content start -->
 
@@ -40,7 +43,7 @@ $users = mysqli_query($db, $users_query);
             <div class="card-header">
                 User List
             </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow-y: scroll; height: 300px;">
                 <div class="example-content">
                     <table class="table">
                         <thead class="table-dark">
@@ -52,16 +55,23 @@ $users = mysqli_query($db, $users_query);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php  $number = 1;?>
-                            <?php foreach($users as $user) : ?>
-                               
-                            <tr>
-                                <th scope="row"><?= $number++ ?></th>
-                                <td><?= $user['name'] ?></td>
-                                <td><?= $user['email'] ?></td>
-                                <td>@mdo</td>
-                            </tr>
-                           <?php endforeach; ?>
+                            <?php
+                            $number = 1;
+                            $id = $_SESSION['auth_id'];
+                            ?>
+
+                            <?php foreach ($users as $user) :
+                                if ($user['id'] == $id) {
+                                    continue;
+                                }
+                            ?>
+                                <tr>
+                                    <th scope="row"><?= $number++ ?></th>
+                                    <td><?= $user['name'] ?></td>
+                                    <td><?= $user['email'] ?></td>
+                                    <td>@mdo</td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
