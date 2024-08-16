@@ -16,8 +16,8 @@ include "../master/header.php";
 
 <div class="row">
     <!-- name update start -->
-    <div class="col-md-4">
-        <div class="card" style="overflow-y: scroll; height: 300px;">
+    <div class="col-md-6">
+        <div class="card" style="overflow-y: scroll; height: 250px;">
             <div class="card-header">
                 USER-NAME
             </div>
@@ -27,7 +27,7 @@ include "../master/header.php";
                         <label for="exampleInputEmail1" class="form-label">UserName</label>
                         <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
-                        <!-- name error start -->
+                        <!-- Image error start -->
                         <?php if (isset($_SESSION["name_error"])) :
                         ?>
                             <div id="emailHelp" class="form-text text-danger fs-6 mt-3"><?= $_SESSION["name_error"] ?></div>
@@ -54,8 +54,8 @@ include "../master/header.php";
     <!-- name update end -->
 
     <!-- email update start -->
-    <div class="col-md-4">
-        <div class="card" style="overflow-y: scroll; height: 300px;">
+    <div class="col-md-6">
+        <div class="card" style="overflow-y: scroll; height: 250px;">
             <div class="card-header">
                 USER-EMAIL
             </div>
@@ -92,8 +92,8 @@ include "../master/header.php";
     <!-- email update end -->
 
     <!-- password update start -->
-    <div class="col-md-4">
-        <div class="card" style="overflow-y: scroll; height: 300px;">
+    <div class="col-md-6">
+        <div class="card" style="overflow-y: scroll; height: 250px;">
             <div class="card-header">
                 USER-PASSWORD
             </div>
@@ -186,6 +186,44 @@ include "../master/header.php";
         </div>
     </div>
     <!-- password update end -->
+
+    <!-- Image update start -->
+    <div class="col-md-6">
+        <div class="card" style="overflow-y: scroll; height: 250px;">
+            <div class="card-header">
+                USER-IMAGE
+            </div>
+            <div class="card-body">
+                <form action="update.php" method="post" enctype="multipart/form-data">
+                    <div class="example-content">
+                        <label for="exampleInputEmail1" class="form-label">UserName</label>
+                        <input type="file" name="image" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        <!-- Image error start -->
+                        <?php if (isset($_SESSION["image_error"])) :
+                        ?>
+                            <div id="emailHelp" class="form-text text-danger fs-6 mt-3"><?= $_SESSION["image_error"] ?></div>
+                        <?php endif;
+                        unset($_SESSION["image_error"]); ?>
+                        <!-- Image error end -->
+
+                        <!-- Image update start -->
+                        <?php if (isset($_SESSION["image_update"])) :
+                        ?>
+                            <div id="emailHelp" class="form-text text-success fs-6 mt-3"><?= $_SESSION["image_update"] ?></div>
+                        <?php endif;
+                        unset($_SESSION["image_update"]); ?>
+                        <!-- Image update end -->
+                        <div>
+
+                            <button type="submit" name="image_btn" class="btn btn-primary my-3"><i class="material-icons">refresh</i>Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Image update end -->
 
 </div>
 

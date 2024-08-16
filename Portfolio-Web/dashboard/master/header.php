@@ -8,10 +8,15 @@ if (!isset($_SESSION['auth_id'])) {
     header("location: ../../authetication/login.php");
 }
 
-
 $explode = explode('/', $_SERVER['PHP_SELF']);
-
 $link = end($explode);
+
+$id = $_SESSION['auth_id'];
+$user_query = "SELECT * FROM users WHERE id='$id'";
+$user_connect = mysqli_query($db, $user_query);
+$user = mysqli_fetch_assoc($user_connect);
+
+
 
 
 ?>
@@ -62,7 +67,13 @@ $link = end($explode);
                 <a href="index.html" class="logo-icon"><span class="logo-text">Neptune</span></a>
                 <div class="sidebar-user-switcher user-activity-online">
                     <a href="#">
-                        <img src="../../dashboard_assets/assets/images/avatars/avatar.png">
+                        <?php if($user['image'] == 'default.webp'): ?>
+                        <img class="rounded-circle" src="../../public/default/<?= $user['image'] ?>">
+                        <?php else : ?>
+                            <img class="rounded-circle" src="../../public/profile/<?= $user['image'] ?>">
+                            <?php endif; ?>
+                          
+
                         <span class="activity-indicator"></span>
                         <span class="user-info-text"><?=  $_SESSION['auth_name']; ?> <br><span class="user-state-info">On a call</span></span>
                     </a>
@@ -85,6 +96,9 @@ $link = end($explode);
                     </li> -->
                     <li class="<?= ($link == 'profile.php') ? 'active-page' : '' ?>">
                         <a href="../profile/profile.php"><i class="material-icons-two-tone">manage_accounts</i>Settings</a>
+                    </li>
+                    <li class="<?= ($link == 'links.php') ? 'active-page' : '' ?>">
+                        <a href="../links/links.php"><i class="material-icons-two-tone">link</i>Links</a>
                     </li>
                     <li>
                         <a href="calendar.html"><i class="material-icons-two-tone">calendar_today</i>Calendar<span class="badge rounded-pill badge-success float-end">14</span></a>
