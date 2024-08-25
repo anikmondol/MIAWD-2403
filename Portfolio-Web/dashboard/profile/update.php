@@ -176,7 +176,7 @@ if (isset($_POST['password_btn'])) {
 
 
 
-// name update
+// image update
 if (isset($_POST['image_btn'])) {
     $image = $_FILES['image']['name'];
     $tmp_img = $_FILES['image']['tmp_name'];
@@ -194,16 +194,19 @@ if (isset($_POST['image_btn'])) {
         if (move_uploaded_file($tmp_img, $local_path)) {
             $query = "UPDATE users SET image='$custom_name_img' WHERE id='$id'";
             mysqli_query($db, $query);
-            $_SESSION["image_update"] = "Password successfully update!!!";
+            $_SESSION["image_update"] = "Image successfully update!!!";
             header("location: profile.php");
         }else {
-            $_SESSION["image_error"] = "your giver  old password doesn't match with our records !!!";
+            $_SESSION["image_error"] = "your giver Image doesn't match with our records !!!";
             header("location: profile.php");
         }
     }
    }
     
 }
+
+
+
 
 
 

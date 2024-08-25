@@ -11,17 +11,16 @@ if (!isset($_SESSION['auth_id'])) {
 $explode = explode('/', $_SERVER['PHP_SELF']);
 $link = end($explode);
 
+
 $id = $_SESSION['auth_id'];
 $user_query = "SELECT * FROM users WHERE id='$id'";
 $user_connect = mysqli_query($db, $user_query);
-$user = mysqli_fetch_assoc($user_connect);
+$list = mysqli_fetch_assoc($user_connect);
 
 
 
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,11 +66,11 @@ $user = mysqli_fetch_assoc($user_connect);
                 <a href="index.html" class="logo-icon"><span class="logo-text">Neptune</span></a>
                 <div class="sidebar-user-switcher user-activity-online">
                     <a href="#">
-                        <?php if($user['image'] == 'default.webp'): ?>
-                        <img class="rounded-circle" src="../../public/default/<?= $user['image'] ?>">
+                    <?php if ($list['image'] == 'default.webp'): ?>
+                            <img class="rounded-circle img-fluid" style="width: 55px; height: 55px;" src="../../public/default/<?= $list['image'] ?>">
                         <?php else : ?>
-                            <img class="rounded-circle" src="../../public/profile/<?= $user['image'] ?>">
-                            <?php endif; ?>
+                            <img class="rounded-circle img-fluid" style="width: 55px; height: 55px;" src="../../public/profile/<?= $list['image'] ?>">
+                        <?php endif; ?>
                           
 
                         <span class="activity-indicator"></span>
@@ -83,6 +82,9 @@ $user = mysqli_fetch_assoc($user_connect);
                 <ul class="accordion-menu">
                     <li class="sidebar-title">
                         Apps
+                    </li>
+                    <li>
+                        <a href="../../index.php" target="_blank" class="active"><i class="material-icons-two-tone">visibility</i>Web Site</a>
                     </li>
                     <li class="<?= ($link == 'home.php') ? 'active-page' : '' ?>">
                         <a href="../home/home.php" class="active"><i class="material-icons-two-tone">dashboard</i>Dashboard</a>

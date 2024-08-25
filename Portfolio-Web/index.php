@@ -10,12 +10,11 @@ if (isset($_SESSION['auth_id'])) {
 
     $user_query = "SELECT * FROM users WHERE id='$id'";
     $user_connect = mysqli_query($db, $user_query);
-    $user = mysqli_fetch_assoc($user_connect);
+    $list = mysqli_fetch_assoc($user_connect);
 
     $link_query = "SELECT * FROM links WHERE id='$id'";
     $link_connect = mysqli_query($db, $link_query);
     $link = mysqli_fetch_assoc($link_connect);
-
 }
 
 
@@ -83,11 +82,16 @@ if (isset($_SESSION['auth_id'])) {
                                 <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#about">about</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#service">service</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#portfolio">portfolio</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="./authetication/login.php">Loging/Register</a></li>
+                                        <?php if (isset($_SESSION['auth_id'])) : ?>
+                                            <li class="nav-item"><a class="nav-link" href="./authetication/login.php">Dashboard</a></li>
+                                        <?php else: ?>
+                                            <li class="nav-item"><a class="nav-link" href="./authetication/login.php">Loging/Register</a></li>
+                                        <?php endif; ?>
+
                                     </ul>
                                 </div>
                                 <div class="header-btn">
@@ -128,7 +132,7 @@ if (isset($_SESSION['auth_id'])) {
             </div>
             <div class="social-icon-right mt-20">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab <i class="fa fa-github" aria-hidden="true"></i>"></i></a>
+                <a href="#"><i class="fab <i class=" fa fa-github" aria-hidden="true"></i>"></i></a>
                 <a href="#"><i class="fab fa-google-plus-g"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
@@ -149,32 +153,32 @@ if (isset($_SESSION['auth_id'])) {
                         <div class="banner-content">
 
                             <h6 class="wow fadeInUp" data-wow-delay="0.2s">HELLO!</h6>
+
                             <?php if (isset($id)) : ?>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?= $user['name'] ?> </h2>
-                            <?php else:  ?>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am Anik Mondal </h2>
+                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?= $list['name'] ?></h2>
+                            <?php else: ?>
+                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am Anik Mondal</h2>
                             <?php endif; ?>
 
-                            <p class="wow fadeInUp" data-wow-delay="0.6s">I'm Will <?php if (isset($id)) : ?>
-                                    <?= $user['name'] ?>
-                                <?php else:  ?>
-                                    I am Anik Mondal
-                                <?php endif; ?>
-                                , professional web developer with long time experience in this field​.</p>
+                            <p class="wow fadeInUp" data-wow-delay="0.6s">
+                                I'm <?= isset($id) ? $list['name'] : 'Anik Mondal' ?>,
+                                a professional web developer with long time experience in this field​.
+                            </p>
+
                             <div class="banner-social wow fadeInUp" data-wow-delay="0.8s">
                                 <ul>
-                                    <li><a href="<?= $link['facebook'] ?>" target="_blank" ><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="<?= $link['github'] ?>" target="_blank" ><i class="fab fa-github"></i></a></li>
-                                    <li><a href="<?= $link['linkedin'] ?>" target="_blank" ><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="<?= $link['whatsapp'] ?>" target="_blank" ><i class="fab fa-whatsapp"></i></a></li>
+                                    <li><a href="<?= $link['facebook'] ?>" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="<?= $link['github'] ?>" target="_blank"><i class="fab fa-github"></i></a></li>
+                                    <li><a href="<?= $link['linkedin'] ?>" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="<?= $link['whatsapp'] ?>" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
                                 </ul>
                             </div>
                             <a href="#" class="btn wow fadeInUp" data-wow-delay="1s">SEE PORTFOLIOS</a>
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-6 d-none d-lg-block">
-                        <div class="banner-img text-right">
-                            <img src="./front_assets/img/banner/banner_img.png" alt="">
+                        <div class="banner-img text-right mb-5">
+                            <img class="img-fluid" src="./front_assets/img/banner/banner_img.png" alt="">
                         </div>
                     </div>
                 </div>
