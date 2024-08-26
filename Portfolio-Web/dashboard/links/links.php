@@ -13,8 +13,8 @@ include "../master/header.php";
 
 <div class="row">
 
-   <!-- password update start -->
-    <div class="col-md-6">
+   <!-- links update start -->
+    <div class="col-md-9 mx-auto">
         <div class="card" style="overflow-y: scroll; height: 500px;">
             <div class="card-header">
                 USER-PASSWORD
@@ -44,25 +44,16 @@ include "../master/header.php";
                          <!-- link_update start -->
                          <?php if (isset($_SESSION["link_update"])) :
                         ?>
-                            <div id="emailHelp" class="form-text text-danger fs-6 mt-3"><?= $_SESSION["link_update"] ?></div>
+                            <div id="emailHelp" class="form-text text-success fs-6 mt-3"><?= $_SESSION["link_update"] ?></div>
                         <?php endif;
                         unset($_SESSION["link_update"]); ?>
                         <!-- link_update end -->
-
-                        <!-- old_password_update start -->
-                        <?php if (isset($_SESSION["old_password_update"])) :
-                        ?>
-                            <div id="emailHelp" class="form-text text-success fs-6 mt-3"><?= $_SESSION["old_password_update"] ?></div>
-                        <?php endif;
-                        unset($_SESSION["old_password_update"]); ?>
-                        <!-- old_password_update end -->
-
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- password update end -->
+    <!-- links update end -->
 
 </div>
 

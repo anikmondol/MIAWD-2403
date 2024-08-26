@@ -45,6 +45,9 @@ $list = mysqli_fetch_assoc($user_connect);
     <link href="../../dashboard_assets/assets/plugins/pace/pace.css" rel="stylesheet">
 
     
+    <!-- font-awesome cnd link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Theme Styles -->
     <link href="../../dashboard_assets/assets/css/main.min.css" rel="stylesheet">
     <link href="../../dashboard_assets/assets/css/custom.css" rel="stylesheet">
@@ -67,12 +70,10 @@ $list = mysqli_fetch_assoc($user_connect);
                 <div class="sidebar-user-switcher user-activity-online">
                     <a href="#">
                     <?php if ($list['image'] == 'default.webp'): ?>
-                            <img class="rounded-circle img-fluid" style="width: 55px; height: 55px;" src="../../public/default/<?= $list['image'] ?>">
+                            <img class="rounded-circle img-fluid" style="width: 50px; height: 50px;" src="../../public/default/<?= $list['image'] ?>">
                         <?php else : ?>
-                            <img class="rounded-circle img-fluid" style="width: 55px; height: 55px;" src="../../public/profile/<?= $list['image'] ?>">
+                            <img class="rounded-circle img-fluid" style="width: 50px; height: 50px;" src="../../public/profile/<?= $list['image'] ?>">
                         <?php endif; ?>
-                          
-
                         <span class="activity-indicator"></span>
                         <span class="user-info-text"><?=  $_SESSION['auth_name']; ?> <br><span class="user-state-info">On a call</span></span>
                     </a>
@@ -102,7 +103,10 @@ $list = mysqli_fetch_assoc($user_connect);
                     <li class="<?= ($link == 'links.php') ? 'active-page' : '' ?>">
                         <a href="../links/links.php"><i class="material-icons-two-tone">link</i>Links</a>
                     </li>
-                    <li>
+                    <li class="<?= ($link == 'services.php') ? 'active-page' : '' ?>">
+                        <a href="../services/services.php"><i class="material-icons-two-tone">medical_services</i>Services</a>
+                    </li>
+                    <!-- <li>
                         <a href="calendar.html"><i class="material-icons-two-tone">calendar_today</i>Calendar<span class="badge rounded-pill badge-success float-end">14</span></a>
                     </li>
                     <li>
@@ -138,7 +142,7 @@ $list = mysqli_fetch_assoc($user_connect);
                                 <a href="error.html">Error</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

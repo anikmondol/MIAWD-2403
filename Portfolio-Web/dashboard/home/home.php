@@ -4,9 +4,7 @@ include "../master/header.php";
 include "../../config/database.php";
 
 $users_query = "select * FROM users";
-
 $users = mysqli_query($db, $users_query);
-
 
 ?>
 

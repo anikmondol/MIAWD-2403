@@ -13,14 +13,14 @@ if (isset($_POST['link_btn'])) {
 
 
     $query = "INSERT INTO links (user_id,facebook,github,linkedin,whatsapp) VALUES ('$id','$facebook','$github','$linkedin','$whatsapp')";
-    $_SESSION["link_update"] = "link something try more!!!";
+    $_SESSION["link_update"] = "link update successful !!";
     mysqli_query($db, $query);
     header("location: links.php");
 
 
 
     // if (!$facebook && !$github && !$linkedin && !$whatsapp) {
-    //     $_SESSION["link_error"] = "link something try more  !!!";
+    //     $_SESSION["link_error"] = "link something error try more  !!!";
     //     header("location: links.php");
     // } else {
     //     if ($facebook && $github && $linkedin && $whatsapp) {
