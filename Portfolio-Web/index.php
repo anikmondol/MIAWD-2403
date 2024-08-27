@@ -16,7 +16,7 @@ if (isset($_SESSION['auth_id'])) {
     $link_connect = mysqli_query($db, $link_query);
     $link = mysqli_fetch_assoc($link_connect);
 
-    $services_query = "SELECT * FROM services";
+    $services_query = "SELECT * FROM services WHERE status='active'";
     $services = mysqli_query($db, $services_query);
 }
 
@@ -39,15 +39,12 @@ if (isset($_SESSION['auth_id'])) {
     <link rel="shortcut icon" type="image/x-icon" href="./front_assets/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
-
-    <!-- font-awesome cnd link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!-- CSS here -->
     <link rel="stylesheet" href="./front_assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./front_assets/css/animate.min.css">
     <link rel="stylesheet" href="./front_assets/css/magnific-popup.css">
     <link rel="stylesheet" href="./front_assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./front_assets/css/flaticon.css">
     <link rel="stylesheet" href="./front_assets/css/slick.css">
     <link rel="stylesheet" href="./front_assets/css/aos.css">
