@@ -24,11 +24,17 @@ if (isset($_POST['create'])) {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
+
+    
+
     $query = "DELETE FROM services WHERE id='$id'";
     mysqli_query($db, $query);
     $_SESSION["delete_done"] = "old service  delete successfully !!!";
     header("location: services.php");
 }
+
+
 
 if (isset($_GET['status_id'])) {
     $status_id =  $_GET['status_id'];
@@ -38,23 +44,18 @@ if (isset($_GET['status_id'])) {
     $services = mysqli_fetch_assoc($connect);
 
     if ($services['status'] == 'deactive') {
-
         $update_query = "UPDATE services SET status='active' WHERE id='$status_id'";
         mysqli_query($db, $update_query);
-        $_SESSION["services_status"] = "services status active successfully complete !!!";
+        $_SESSION["active_status"] = "services status active successfully complete !!!";
         header("location: services.php");
-
-       
-
-       
-       
     } else {
        
         $update_query = "UPDATE services SET status='deactive' WHERE id='$status_id'";
         mysqli_query($db, $update_query);
-        $_SESSION["services_status"] = "services status deactive successfully complete !!!";
+        $_SESSION["deactive_status"] = "services status deactive successfully complete !!!";
         header("location: services.php");
     }
+
 }
 
 

@@ -34,7 +34,7 @@ if (isset($_GET['edit'])) {
                     <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $service['title']; ?>">
 
                     <label for="exampleInputEmail1" class="form-label">Description</label>
-                    <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $service['description']; ?>">
+                    <textarea type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> <?= $service['description']; ?>" </textarea>
 
                     <label for="exampleInputEmail1" class="form-label">Icons</label>
                     <input readonly type="text" name="icons" class="form-control icon_value" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $service['icon']; ?>">

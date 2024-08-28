@@ -3,8 +3,9 @@
 include "../master/header.php";
 include "../../config/database.php";
 
-$services_query = "SELECT * FROM portfolios";
-$portfolios = mysqli_query($db, $services_query);
+$portfolios_query = "SELECT * FROM portfolios";
+$portfolios = mysqli_query($db, $portfolios_query);
+$result = mysqli_fetch_assoc($portfolios);
 
 ?>
 <div class="row">
@@ -14,6 +15,7 @@ $portfolios = mysqli_query($db, $services_query);
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-12">
         <?php if (isset($_SESSION['port_create'])) :  ?>
@@ -27,6 +29,51 @@ $portfolios = mysqli_query($db, $services_query);
         unset($_SESSION['port_create']); ?>
     </div>
 </div>
+
+
+<div class="row">
+    <div class="col-12">
+        <?php if (isset($_SESSION['active_status'])) :  ?>
+            <div class="alert alert-custom d-flex align-items-center" role="alert">
+                <div class="custom-alert-icon icon-success"><i class="material-icons-outlined">notifications_active</i></div>
+                <div class="alert-content">
+                    <?= $_SESSION["active_status"]; ?>
+                </div>
+            </div>
+        <?php endif;
+        unset($_SESSION['active_status']); ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <?php if (isset($_SESSION['deactive_status'])) :  ?>
+            <div class="alert alert-custom d-flex align-items-center" role="alert">
+                <div class="custom-alert-icon icon-danger"><i class="material-icons-outlined">notifications_off</i></div>
+                <div class="alert-content">
+                    <?= $_SESSION["deactive_status"]; ?>
+                </div>
+            </div>
+        <?php endif;
+        unset($_SESSION['deactive_status']); ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <?php if (isset($_SESSION['delete_done'])) :  ?>
+            <div class="alert alert-custom d-flex align-items-center" role="alert">
+                <div class="custom-alert-icon icon-dark"><i class="material-icons-outlined">close</i></div>
+                <div class="alert-content">
+                    <?= $_SESSION["delete_done"]; ?>
+                </div>
+            </div>
+        <?php endif;
+        unset($_SESSION['delete_done']); ?>
+    </div>
+</div>
+
+
 <div class="row">
     <div class="col-12">
         <?php if (isset($_SESSION['port_error'])) :  ?>
@@ -40,6 +87,8 @@ $portfolios = mysqli_query($db, $services_query);
         unset($_SESSION['port_error']); ?>
     </div>
 </div>
+
+
 
 <div class="row">
     <div class="col-md-9 mx-auto">
@@ -65,29 +114,39 @@ $portfolios = mysqli_query($db, $services_query);
                         <tbody>
                             <?php
                             $number = 1;
-                            foreach ($portfolios as $portfolio) :
+                            if (empty($result)):
                             ?>
                                 <tr>
-                                    <th scope="row"><?= $number++ ?></th>
-                                    <td>
-                                        <img src="../../public/portfolio/<?= $portfolio['image'] ?>" alt="portfolio image" style="width: 70px; height: 70px; object-fit: cover;">
-                                    </td>
-                                    <td><?= $portfolio['title'] ?></td>
-                                    <td><a href="">
-                                            <?= $portfolio['status'] ?>
-                                        </a></td>
-                                    <td>
-                                        <div class="d-flex justify-content-evenly align-items-center">
-                                            <a href="">
-                                                <i class="fa-2x text-info fa fa-chain"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="fa-2x text-danger fa fa-trash-o "></i>
-                                            </a>
-                                        </div>
-                                    </td>
+                                    <td colspan="5" class="text-center">No portfolios found!</td>
                                 </tr>
-                            <?php endforeach; ?>
+                                <?php
+                            else:
+                                foreach ($portfolios as $portfolio):
+                                ?>
+                                    <tr>
+                                        <th scope="row"><?= $number++ ?></th>
+                                        <td>
+                                            <img src="../../public/portfolio/<?= $portfolio['image'] ?>" alt="portfolio image" style="width: 70px; height: 70px; object-fit: cover;">
+                                        </td>
+                                        <td><?= $portfolio['title'] ?></td>
+                                        <td><a href="store.php?status_id=<?= $portfolio['id'] ?>" class=" p-2 <?= ($portfolio['status'] == 'deactive') ? 'badge bg-danger text-white' : 'badge bg-success  text-white'; ?>">
+                                                <?= $portfolio['status'] ?>
+                                            </a></td>
+                                        <td>
+                                            <div class="d-flex justify-content-evenly align-items-center">
+                                                <a href="./edit.php?edit_id=<?= $portfolio['id'] ?>">
+                                                    <i class="fa-2x text-info fa fa-chain"></i>
+                                                </a>
+                                                <a href="./store.php?delate_id=<?= $portfolio['id'] ?>">
+                                                    <i class="fa-2x text-danger fa fa-trash-o "></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            <?php
+                                endforeach;
+                            endif;
+                            ?>
                         </tbody>
                     </table>
                 </div>

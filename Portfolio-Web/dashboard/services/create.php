@@ -23,7 +23,7 @@ include "../../public/fonts/fonts.php";
                     <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
                     <label for="exampleInputEmail1" class="form-label">Description</label>
-                    <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <textarea type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></textarea>
 
                     <label for="exampleInputEmail1" class="form-label">Icons</label>
                     <input readonly type="text" name="icons" class="form-control icon_value" id="exampleInputEmail1" aria-describedby="emailHelp">

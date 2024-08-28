@@ -32,15 +32,29 @@ $services = mysqli_query($db, $services_query);
 
 <div class="row">
     <div class="col-12">
-        <?php if (isset($_SESSION['services_status'])) :  ?>
+        <?php if (isset($_SESSION['active_status'])) :  ?>
             <div class="alert alert-custom d-flex align-items-center" role="alert">
-                <div class="custom-alert-icon icon-success"><i class="material-icons-outlined">done</i></div>
+                <div class="custom-alert-icon icon-success"><i class="material-icons-outlined">notifications_active</i></div>
                 <div class="alert-content">
-                <?= $_SESSION["services_status"]; ?>
+                <?= $_SESSION["active_status"]; ?>
                 </div>
             </div>
         <?php endif;
-        unset($_SESSION['services_status']); ?>
+        unset($_SESSION['active_status']); ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <?php if (isset($_SESSION['deactive_status'])) :  ?>
+            <div class="alert alert-custom d-flex align-items-center" role="alert">
+                <div class="custom-alert-icon icon-danger"><i class="material-icons-outlined">notifications_off</i></div>
+                <div class="alert-content">
+                <?= $_SESSION["deactive_status"]; ?>
+                </div>
+            </div>
+        <?php endif;
+        unset($_SESSION['deactive_status']); ?>
     </div>
 </div>
 
@@ -89,7 +103,7 @@ $services = mysqli_query($db, $services_query);
                                     <td><i class="fa-3x <?= $service['icon'] ?>"></i></td>
                                     <td><?= $service['title'] ?></td>
                                     <td>
-                                        <a href="store.php?status_id=<?= $service['id'] ?>" class="<?= ($service['status'] == 'deactive') ? 'badge bg-danger text-white': 'badge bg-success text-white'; ?>">
+                                        <a href="store.php?status_id=<?= $service['id'] ?>" class=" p-2 <?= ($service['status'] == 'deactive') ? 'badge bg-danger text-white': 'badge bg-success text-white'; ?>">
                                         <?= $service['status'] ?>
                                         </a>
                                     </td>

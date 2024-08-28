@@ -107,7 +107,7 @@ $list = mysqli_fetch_assoc($user_connect);
                         <a href="../services/services.php"><i class="material-icons-two-tone">medical_services</i>Services</a>
                     </li>
                     <li class="<?= ($link == 'portfolio.php') ? 'active-page' : '' ?>">
-                        <a href="../portfolio/portfolio.php"><i class="material-icons-two-tone">folder_shared</i>Portfolio</a>
+                        <a href="../portfolio/portfolio.php"><i class="material-icons-two-tone">contact_emergency</i>Portfolio</a>
                     </li>
                     <!-- <li>
                         <a href="calendar.html"><i class="material-icons-two-tone">calendar_today</i>Calendar<span class="badge rounded-pill badge-success float-end">14</span></a>
