@@ -29,7 +29,7 @@ if (isset($_GET['edit_id'])) {
             <h5>USER-PORTFOLIO</h5>
         </div>
         <div class="card-body">
-        <form action="store.php?edit_id=<?= $portfolio['id'] ?>" method="post" enctype="multipart/form-data">>
+        <form action="store.php?edit_id=<?= $portfolio['id'] ?>" method="post" enctype="multipart/form-data">
                 <div class="example-content">
                     <label for="exampleInputEmail1" class="form-label">Project Title</label>
                     <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $portfolio['title']; ?>"

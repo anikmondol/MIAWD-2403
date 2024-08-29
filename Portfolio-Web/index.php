@@ -22,6 +22,8 @@ if (isset($_SESSION['auth_id'])) {
     $portfolio_query = "SELECT * FROM portfolios WHERE status='active'";
     $portfolios = mysqli_query($db, $portfolio_query);
 
+    $education_query = "SELECT * FROM educations WHERE status='active'";
+    $educations = mysqli_query($db, $education_query);
 }
 
 
@@ -217,62 +219,24 @@ if (isset($_SESSION['auth_id'])) {
                             <h3>Education:</h3>
                         </div>
                         <!-- Education Item -->
+                        <?php
+                    foreach ($educations as $education) :
+                    ?>
                         <div class="education">
-                            <div class="year">2020</div>
+                            <div class="year"><?=$education['year'] ?></div>
                             <div class="line"></div>
                             <div class="location">
-                                <span>PHD of Interaction Design &amp; Animation</span>
+                            <span><?= $education['title']  ?> &amp; Animation</span>
                                 <div class="progressWrapper">
                                     <div class="progress">
-                                        <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: <?= $education['ration'] ?>%;" aria-valuenow="<?= $education['ration'] ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- End Education Item -->
-                        <!-- Education Item -->
-                        <div class="education">
-                            <div class="year">2016</div>
-                            <div class="line"></div>
-                            <div class="location">
-                                <span>Master of Database Administration</span>
-                                <div class="progressWrapper">
-                                    <div class="progress">
-                                        <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Education Item -->
-                        <!-- Education Item -->
-                        <div class="education">
-                            <div class="year">2010</div>
-                            <div class="line"></div>
-                            <div class="location">
-                                <span>Bachelor of Computer Engineering</span>
-                                <div class="progressWrapper">
-                                    <div class="progress">
-                                        <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0"
-                                            aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Education Item -->
-                        <!-- Education Item -->
-                        <div class="education">
-                            <div class="year">2005</div>
-                            <div class="line"></div>
-                            <div class="location">
-                                <span>Diploma of Computer</span>
-                                <div class="progressWrapper">
-                                    <div class="progress">
-                                        <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0"
-                                            aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
+
+
                         <!-- End Education Item -->
                     </div>
                 </div>
@@ -293,7 +257,6 @@ if (isset($_SESSION['auth_id'])) {
                 </div>
                 <div class="row">
                     <?php
-                    $number = 1;
                     foreach ($services as $service) :
                     ?>
                         <div class="col-lg-4 col-md-6">
@@ -323,30 +286,26 @@ if (isset($_SESSION['auth_id'])) {
                     </div>
                 </div>
                 <div class="row">
-
-                <?php
-                    $number = 1;
+                    <?php
                     foreach ($portfolios as $portfolio) :
                     ?>
-                    
-
-                    <div class="col-lg-4 col-md-6 pitem">
-                        <div class="speaker-box">
-                            <div class="speaker-thumb">
-                                <img style="height: 500px; object-fit: cover;" class="img-fluid" src="./public/portfolio/<?= $portfolio['image']; ?>" alt="img">
-                            </div>
-                            <div class="speaker-overlay">
-                                <span><?= $portfolio['subtitle'] ?></span>
-                                <h4><a href="portfolio-single.html">
-                                    <?= $portfolio['title'] ?>
-                                </a></h4>
-                                <a href="./dashboard/portfolio/single_portfolio.php?id=<?= $portfolio['id'] ?>" class="arrow-btn">More information <span></span></a>
+                        <div class="col-lg-4 col-md-6 pitem">
+                            <div class="speaker-box">
+                                <div class="speaker-thumb">
+                                    <img style="height: 500px; object-fit: cover;" class="img-fluid" src="./public/portfolio/<?= $portfolio['image']; ?>" alt="img">
+                                </div>
+                                <div class="speaker-overlay">
+                                    <span><?= $portfolio['subtitle'] ?></span>
+                                    <h4><a href="portfolio-single.html">
+                                            <?= $portfolio['title'] ?>
+                                        </a></h4>
+                                    <a href="./dashboard/portfolio/single_portfolio.php?id=<?= $portfolio['id'] ?>" class="arrow-btn">More information <span></span></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                     <?php endforeach; ?>
-                    
+
                 </div>
             </div>
         </section>

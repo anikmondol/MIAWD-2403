@@ -117,7 +117,9 @@ $result = mysqli_fetch_assoc($portfolios);
                             if (empty($result)):
                             ?>
                                 <tr>
-                                    <td colspan="5" class="text-center">No portfolios found!</td>
+                                    <th colspan="5" class="text-center text-danger">
+                                        No data found!!
+                                    </th>
                                 </tr>
                                 <?php
                             else:

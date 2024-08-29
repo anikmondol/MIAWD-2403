@@ -94,9 +94,6 @@ $list = mysqli_fetch_assoc($user_connect);
                         <a href="../logout/logout.php" class="active"><i class="material-icons-two-tone">logout
                         </i>Logout</a>
                     </li>
-                    <!-- <li>
-                        <a href="mailbox.html"><i class="material-icons-two-tone">inbox</i>Mailbox<span class="badge rounded-pill badge-danger float-end">87</span></a>
-                    </li> -->
                     <li class="<?= ($link == 'profile.php') ? 'active-page' : '' ?>">
                         <a href="../profile/profile.php"><i class="material-icons-two-tone">manage_accounts</i>Settings</a>
                     </li>
@@ -109,43 +106,9 @@ $list = mysqli_fetch_assoc($user_connect);
                     <li class="<?= ($link == 'portfolio.php') ? 'active-page' : '' ?>">
                         <a href="../portfolio/portfolio.php"><i class="material-icons-two-tone">contact_emergency</i>Portfolio</a>
                     </li>
-                    <!-- <li>
-                        <a href="calendar.html"><i class="material-icons-two-tone">calendar_today</i>Calendar<span class="badge rounded-pill badge-success float-end">14</span></a>
+                    <li class="<?= ($link == 'education.php') ? 'active-page' : '' ?>">
+                        <a href="../education/education.php"><i class="material-icons-two-tone">school</i>education</a>
                     </li>
-                    <li>
-                        <a href="todo.html"><i class="material-icons-two-tone">done</i>Todo</a>
-                    </li>
-                    <li>
-                        <a href=""><i class="material-icons-two-tone">star</i>Pages<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="pricing.html">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="invoice.html">Invoice</a>
-                            </li>
-                            <li>
-                                <a href="settings.html">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#">Authentication<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="sign-in.html">Sign In</a>
-                                    </li>
-                                    <li>
-                                        <a href="sign-up.html">Sign Up</a>
-                                    </li>
-                                    <li>
-                                        <a href="lock-screen.html">Lock Screen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="error.html">Error</a>
-                            </li>
-                        </ul>
-                    </li> -->
                 </ul>
             </div>
         </div>
