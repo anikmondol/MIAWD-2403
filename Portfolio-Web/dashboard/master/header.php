@@ -70,9 +70,9 @@ $list = mysqli_fetch_assoc($user_connect);
                 <div class="sidebar-user-switcher user-activity-online">
                     <a href="#">
                     <?php if ($list['image'] == 'default.webp'): ?>
-                            <img class="rounded-circle img-fluid" style="width: 50px; height: 50px;" src="../../public/default/<?= $list['image'] ?>">
+                            <img class="rounded-circle img-fluid" style="width: 50px; height: 50px; object-fit: cover;" src="../../public/default/<?= $list['image'] ?>">
                         <?php else : ?>
-                            <img class="rounded-circle img-fluid" style="width: 50px; height: 50px;" src="../../public/profile/<?= $list['image'] ?>">
+                            <img class="rounded-circle img-fluid" style="width: 50px; height: 50px; object-fit: cover;" src="../../public/profile/<?= $list['image'] ?>">
                         <?php endif; ?>
                         <span class="activity-indicator"></span>
                         <span class="user-info-text"><?=  $_SESSION['auth_name']; ?> <br><span class="user-state-info">On a call</span></span>

@@ -5,6 +5,7 @@ include "../../config/database.php";
 
 $services_query = "SELECT * FROM services";
 $services = mysqli_query($db, $services_query);
+$result = mysqli_fetch_array($services);
 
 ?>
 
@@ -94,9 +95,17 @@ $services = mysqli_query($db, $services_query);
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <?php 
+                        <?php
                             $number = 1;
+                            if (empty($result)):
+                            ?>
+                                <tr>
+                                    <th colspan="5" class="text-center text-danger">
+                                        No data found!!
+                                    </th>
+                                </tr>
+                            <?php 
+                           else:
                             foreach ($services as $service) :  
                             ?>
                                 <tr>
@@ -119,7 +128,7 @@ $services = mysqli_query($db, $services_query);
                                         </div>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endforeach; endif;?>
                         </tbody>
                     </table>
                 </div>

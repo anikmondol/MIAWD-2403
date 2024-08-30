@@ -5,6 +5,7 @@ include "../../config/database.php";
 
 $users_query = "select * FROM users";
 $users = mysqli_query($db, $users_query);
+$result = mysqli_fetch_assoc($users);
 
 ?>
 
@@ -53,8 +54,17 @@ $users = mysqli_query($db, $users_query);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+                        <?php
                             $number = 1;
+                            if (empty($result)):
+                            ?>
+                                <tr>
+                                    <th colspan="5" class="text-center text-danger">
+                                        No data found!!
+                                    </th>
+                                </tr>
+                            <?php
+                           else:
                             $id = $_SESSION['auth_id'];
                             ?>
 
@@ -69,7 +79,7 @@ $users = mysqli_query($db, $users_query);
                                     <td><?= $user['email'] ?></td>
                                     <td>@mdo</td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endforeach; endif;?>
                         </tbody>
                     </table>
                 </div>

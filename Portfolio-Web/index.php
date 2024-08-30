@@ -3,28 +3,45 @@
 session_start();
 include "./config/database.php";
 
+$id = $_SESSION['auth_id'];
 
+$user_query = "SELECT * FROM users WHERE id='$id'";
+$user_connect = mysqli_query($db, $user_query);
+$list = mysqli_fetch_assoc($user_connect);
 
-if (isset($_SESSION['auth_id'])) {
-    $id = $_SESSION['auth_id'];
+$link_query = "SELECT * FROM links WHERE user_id='$id'";
+$link_connect = mysqli_query($db, $link_query);
+$link = mysqli_fetch_assoc($link_connect);
 
-    $user_query = "SELECT * FROM users WHERE id='$id'";
-    $user_connect = mysqli_query($db, $user_query);
-    $list = mysqli_fetch_assoc($user_connect);
+$services_query = "SELECT * FROM services WHERE status='active'";
+$services = mysqli_query($db, $services_query);
 
-    $link_query = "SELECT * FROM links WHERE user_id='$id'";
-    $link_connect = mysqli_query($db, $link_query);
-    $link = mysqli_fetch_assoc($link_connect);
+$portfolio_query = "SELECT * FROM portfolios WHERE status='active'";
+$portfolios = mysqli_query($db, $portfolio_query);
 
-    $services_query = "SELECT * FROM services WHERE status='active'";
-    $services = mysqli_query($db, $services_query);
+$education_query = "SELECT * FROM educations WHERE status='active'";
+$educations = mysqli_query($db, $education_query);
 
-    $portfolio_query = "SELECT * FROM portfolios WHERE status='active'";
-    $portfolios = mysqli_query($db, $portfolio_query);
+// if (isset($_SESSION['auth_id'])) {
+//     $id = $_SESSION['auth_id'];
 
-    $education_query = "SELECT * FROM educations WHERE status='active'";
-    $educations = mysqli_query($db, $education_query);
-}
+//     $user_query = "SELECT * FROM users WHERE id='$id'";
+//     $user_connect = mysqli_query($db, $user_query);
+//     $list = mysqli_fetch_assoc($user_connect);
+
+//     $link_query = "SELECT * FROM links WHERE user_id='$id'";
+//     $link_connect = mysqli_query($db, $link_query);
+//     $link = mysqli_fetch_assoc($link_connect);
+
+//     $services_query = "SELECT * FROM services WHERE status='active'";
+//     $services = mysqli_query($db, $services_query);
+
+//     $portfolio_query = "SELECT * FROM portfolios WHERE status='active'";
+//     $portfolios = mysqli_query($db, $portfolio_query);
+
+//     $education_query = "SELECT * FROM educations WHERE status='active'";
+//     $educations = mysqli_query($db, $education_query);
+// }
 
 
 
@@ -220,20 +237,20 @@ if (isset($_SESSION['auth_id'])) {
                         </div>
                         <!-- Education Item -->
                         <?php
-                    foreach ($educations as $education) :
-                    ?>
-                        <div class="education">
-                            <div class="year"><?=$education['year'] ?></div>
-                            <div class="line"></div>
-                            <div class="location">
-                            <span><?= $education['title']  ?> &amp; Animation</span>
-                                <div class="progressWrapper">
-                                    <div class="progress">
-                                    <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: <?= $education['ration'] ?>%;" aria-valuenow="<?= $education['ration'] ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                        foreach ($educations as $education) :
+                        ?>
+                            <div class="education">
+                                <div class="year"><?= $education['year'] ?></div>
+                                <div class="line"></div>
+                                <div class="location">
+                                    <span><?= $education['title']  ?> </span>
+                                    <div class="progressWrapper">
+                                        <div class="progress">
+                                            <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: <?= $education['ration'] ?>%;" aria-valuenow="<?= $education['ration'] ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
 
 
@@ -474,11 +491,11 @@ if (isset($_SESSION['auth_id'])) {
                     </div>
                     <div class="col-lg-6">
                         <div class="contact-form">
-                            <form action="#">
-                                <input type="text" placeholder="your name *">
-                                <input type="email" placeholder="your email *">
-                                <textarea name="message" id="message" placeholder="your message *"></textarea>
-                                <button class="btn">SEND</button>
+                            <form action="./dashboard/email/action.php" method="post">
+                                <input type="text" placeholder="your name *" name="name">
+                                <input name="email" type="email" placeholder="your email *" style="text-transform: lowercase !important;">
+                                <textarea name="body" id="message" placeholder="your message *"></textarea>
+                                <button type="submit" class="btn" name="email_sender">SEND</button>
                             </form>
                         </div>
                     </div>
