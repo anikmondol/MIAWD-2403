@@ -44,8 +44,10 @@ $list = mysqli_fetch_assoc($user_connect);
     <link href="../../dashboard_assets/assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
     <link href="../../dashboard_assets/assets/plugins/pace/pace.css" rel="stylesheet">
 
-    
-    <!-- font-awesome cnd link -->
+    <!-- font-awesome cnd link 6.6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- font-awesome cnd link 4.7 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Theme Styles -->
@@ -108,6 +110,12 @@ $list = mysqli_fetch_assoc($user_connect);
                     </li>
                     <li class="<?= ($link == 'education.php') ? 'active-page' : '' ?>">
                         <a href="../education/education.php"><i class="material-icons-two-tone">school</i>education</a>
+                    </li>
+                    <li class="<?= ($link == 'testimonial.php') ? 'active-page' : '' ?>">
+                        <a href="../testimonial/testimonial.php"><i class="material-icons-two-tone">groups_2</i>Testimonial</a>
+                    </li>
+                    <li class="<?= ($link == 'feedback.php') ? 'active-page' : '' ?>">
+                        <a href="../feedback/feedback.php"><i class="material-icons-two-tone">chat</i>Feedback</a>
                     </li>
                 </ul>
             </div>

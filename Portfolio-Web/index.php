@@ -3,13 +3,11 @@
 session_start();
 include "./config/database.php";
 
-$id = $_SESSION['auth_id'];
-
-$user_query = "SELECT * FROM users WHERE id='$id'";
+$user_query = "SELECT * FROM users";
 $user_connect = mysqli_query($db, $user_query);
 $list = mysqli_fetch_assoc($user_connect);
 
-$link_query = "SELECT * FROM links WHERE user_id='$id'";
+$link_query = "SELECT * FROM links";
 $link_connect = mysqli_query($db, $link_query);
 $link = mysqli_fetch_assoc($link_connect);
 
@@ -21,6 +19,14 @@ $portfolios = mysqli_query($db, $portfolio_query);
 
 $education_query = "SELECT * FROM educations WHERE status='active'";
 $educations = mysqli_query($db, $education_query);
+
+$testimonials_query = "SELECT * FROM testimonials WHERE status='active'";
+$testimonials = mysqli_query($db, $testimonials_query);
+
+$feedback_query = "SELECT * FROM feedbacks WHERE status='active'";
+$feedbacks = mysqli_query($db, $feedback_query);
+
+
 
 // if (isset($_SESSION['auth_id'])) {
 //     $id = $_SESSION['auth_id'];
@@ -67,7 +73,13 @@ $educations = mysqli_query($db, $education_query);
     <link rel="stylesheet" href="./front_assets/css/animate.min.css">
     <link rel="stylesheet" href="./front_assets/css/magnific-popup.css">
     <link rel="stylesheet" href="./front_assets/css/fontawesome-all.min.css">
+
+    <!-- font-awesome cnd link 6.6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- font-awesome cnd link 4.7 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <link rel="stylesheet" href="./front_assets/css/flaticon.css">
     <link rel="stylesheet" href="./front_assets/css/slick.css">
     <link rel="stylesheet" href="./front_assets/css/aos.css">
@@ -180,15 +192,10 @@ $educations = mysqli_query($db, $education_query);
                         <div class="banner-content">
 
                             <h6 class="wow fadeInUp" data-wow-delay="0.2s">HELLO!</h6>
-
-                            <?php if (isset($id)) : ?>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?= $list['name'] ?></h2>
-                            <?php else: ?>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am Anik Mondal</h2>
-                            <?php endif; ?>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?= $list['name'] ?></h2>
 
                             <p class="wow fadeInUp" data-wow-delay="0.6s">
-                                I'm <?= isset($id) ? $list['name'] : 'Anik Mondal' ?>,
+                                I'm <span class="text-uppercase"><?= $list['name'] ?></span>,
                                 a professional web developer with long time experience in this field​.
                             </p>
 
@@ -230,9 +237,7 @@ $educations = mysqli_query($db, $education_query);
                             <h2>About Me</h2>
                         </div>
                         <div class="about-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, sed repudiandae odit deserunt, quas
-                                quibusdam necessitatibus nesciunt eligendi esse sit non reprehenderit quisquam asperiores maxime
-                                blanditiis culpa vitae velit. Numquam!</p>
+                            <p>Hello, my name is Anik Mondal. I am a Jr. PHP & Laravel Developer . But I mostly work in frontend development I have more than 1 year experience in web design and web development.I have skills in HTML5, CSS3, bootstrap, tailwind css, javaScript, Es6, PHP, Laravel, Mysqul etc.</p>
                             <h3>Education:</h3>
                         </div>
                         <!-- Education Item -->
@@ -320,9 +325,7 @@ $educations = mysqli_query($db, $education_query);
                                 </div>
                             </div>
                         </div>
-
                     <?php endforeach; ?>
-
                 </div>
             </div>
         </section>
@@ -334,50 +337,21 @@ $educations = mysqli_query($db, $education_query);
             <div class="container">
                 <div class="fact-wrap">
                     <div class="row justify-content-between">
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
-                            <div class="fact-box text-center mb-50">
-                                <div class="fact-icon">
-                                    <i class="flaticon-award"></i>
-                                </div>
-                                <div class="fact-content">
-                                    <h2><span class="count">245</span></h2>
-                                    <span>Feature Item</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
-                            <div class="fact-box text-center mb-50">
-                                <div class="fact-icon">
-                                    <i class="flaticon-like"></i>
-                                </div>
-                                <div class="fact-content">
-                                    <h2><span class="count">345</span></h2>
-                                    <span>Active Products</span>
+                        <?php
+                        foreach ($feedbacks as $feedback) :
+                        ?>
+                            <div class="col-xl-2 col-lg-3 col-sm-6">
+                                <div class="fact-box text-center mb-50">
+                                    <div class="fact-icon">
+                                        <i class="<?= $feedback['icon'] ?>"></i>
+                                    </div>
+                                    <div class="fact-content">
+                                        <h2><span class="count"><?= $feedback['description'] ?></span></h2>
+                                        <span><?= $feedback['title'] ?></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
-                            <div class="fact-box text-center mb-50">
-                                <div class="fact-icon">
-                                    <i class="flaticon-event"></i>
-                                </div>
-                                <div class="fact-content">
-                                    <h2><span class="count">39</span></h2>
-                                    <span>Year Experience</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
-                            <div class="fact-box text-center mb-50">
-                                <div class="fact-icon">
-                                    <i class="flaticon-woman"></i>
-                                </div>
-                                <div class="fact-content">
-                                    <h2><span class="count">3</span>k</h2>
-                                    <span>Our Clients</span>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -398,30 +372,26 @@ $educations = mysqli_query($db, $education_query);
                 <div class="row justify-content-center">
                     <div class="col-xl-9 col-lg-10">
                         <div class="testimonial-active">
-                            <div class="single-testimonial text-center">
-                                <div class="testi-avatar">
-                                    <img src="./front_assets/img/images/testi_avatar.png" alt="img">
-                                </div>
-                                <div class="testi-content">
-                                    <h4><span>“</span> An event is a message sent by an object to signal the occur rence of an action. The action can causd user interaction such as a button click, or it can result <span>”</span></h4>
-                                    <div class="testi-avatar-info">
-                                        <h5>tonoy jakson</h5>
-                                        <span>head of idea</span>
+
+                            <?php
+                            foreach ($testimonials as $testimonial) :
+                            ?>
+
+                                <div class="single-testimonial text-center">
+                                    <div class="testi-avatar">
+                                        <img class="rounded-circle img-fluid" style="width: 70px; height: 70px;" src="./public/testimonial/<?= $testimonial['image'] ?>" alt="img">
+                                    </div>
+                                    <div class="testi-content">
+                                        <h4><span>“</span> <?= $testimonial['description'] ?> <span>”</span></h4>
+                                        <div class="testi-avatar-info">
+                                            <h5><?= $testimonial['title'] ?></h5>
+                                            <span><?= $testimonial['subtitle'] ?></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="single-testimonial text-center">
-                                <div class="testi-avatar">
-                                    <img src="./front_assets/img/images/testi_avatar.png" alt="img">
-                                </div>
-                                <div class="testi-content">
-                                    <h4><span>“</span> An event is a message sent by an object to signal the occur rence of an action. The action can causd user interaction such as a button click, or it can result <span>”</span></h4>
-                                    <div class="testi-avatar-info">
-                                        <h5>tonoy jakson</h5>
-                                        <span>head of idea</span>
-                                    </div>
-                                </div>
-                            </div>
+
+                            <?php endforeach; ?>
+
                         </div>
                     </div>
                 </div>
@@ -478,13 +448,13 @@ $educations = mysqli_query($db, $education_query);
                             <h2>Contact Information</h2>
                         </div>
                         <div class="contact-content">
-                            <p>Event definition is - somthing that happens occurre How evesnt sentence. Synonym when an unknown printer took a galley.</p>
-                            <h5>OFFICE IN <span>NEW YORK</span></h5>
+                            <p>I am a PHP & Laravel Developer with a strong focus on clean coding. Software Development seeks to attract, inspire, create desires, and motivate people to respond to messages, with the aim of making a favorable impact.</p>
+                            <h5>OFFICE IN <span class="text-uppercase">Dhaka</span></h5>
                             <div class="contact-list">
                                 <ul>
-                                    <li><i class="fas fa-map-marker"></i><span>Address :</span>Event Center park WT 22 New York</li>
-                                    <li><i class="fas fa-headphones"></i><span>Phone :</span>+9 125 645 8654</li>
-                                    <li><i class="fas fa-globe-asia"></i><span>e-mail :</span>info@exemple.com</li>
+                                    <li><i class="fas fa-map-marker"></i><span>Address :</span>Nawabganj, Dhaka, Bangladesh</li>
+                                    <li><i class="fas fa-headphones"></i><span>Phone :</span>+880 193-165-4590</li>
+                                    <li><i class="fas fa-globe-asia"></i><span>e-mail :</span>anikmondol558363@gmail.com</li>
                                 </ul>
                             </div>
                         </div>

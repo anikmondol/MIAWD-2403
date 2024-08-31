@@ -788,5 +788,6 @@ $fonts = array (
     'fa fa-youtube-play',
     'fa fa-youtube-square',
     'fa fa-js',
+    'fa fa-award'
   );
 ?>
